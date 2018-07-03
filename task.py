@@ -31,7 +31,7 @@ class Task:
 
     def __repr__(self):
         return 'Task: {0}\n' \
-               'id: {5}' \
+               'id: {5}\n' \
                'creation time: {1}\n' \
                'status: {2}\n' \
                'end time: {3}\n' \
@@ -40,7 +40,7 @@ class Task:
 
     def __str__(self):
         return 'Task: {0}\n' \
-               'id: {5}' \
+               'id: {5}\n' \
                'creation time: {1}\n' \
                'status: {2}\n' \
                'end time: {3}\n' \

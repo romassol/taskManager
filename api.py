@@ -1,4 +1,3 @@
-from socket import *
 import json
 import hashlib
 from database import Database
@@ -6,10 +5,6 @@ from task import Status
 
 
 class Api:
-    # def __init__(self, database):
-    #     self.active_user = None
-    #     self.database = database
-
     @staticmethod
     def sign_up(login, password, database):
         if database.is_user_in_database(login):
@@ -49,31 +44,3 @@ class Api:
         if active_user is None:
             raise ValueError('You are not authorized')
         return active_user.get_tasks(sorted_keys)
-
-
-# def get_command_and_arguments(line):
-#     return line.split(' ', 2)
-
-# if __name__ == '__main__':
-#     database = Database()
-#     api = Api(database)
-#     commands = {'AUTH': api.log_in, 'REG': api.sign_up, 'ADD': api.add_task, 'LIST': api.get_tasks,
-#                 'CSTAT': api.change_task_status}
-#
-#
-#     sock = socket()
-#     sock.bind(('', 9090))
-#     sock.listen(1)
-#     while True:
-#         conn, addr = sock.accept()
-#         print('connected:', addr)
-#
-#         while True:
-#             data = conn.recv(1024)
-#             command, arguments = data.split(' ', 2)
-#             print(data.decode())
-#             if not data:
-#                 break
-#             conn.send(data.upper())
-#
-#     # conn.close()

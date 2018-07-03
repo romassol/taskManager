@@ -17,30 +17,47 @@ class CommandController:
         command_line = input_line.split(' ', 1)
         if command_line[0] != 'LIST':
             if len(command_line) != 2:
-                raise ValueError('Wrong command')
+                 return 'Wrong command'
         if command_line[0] == 'AUTH' or command_line[0] == 'REG':
             command, arguments = command_line
             arguments = arguments.split(' ')
-            CommandController.find_arguments_error(arguments, 2, command)
-            self.active_user = self.commands[command](*arguments, self.database)
-            return 'Ok'
+            try:
+                CommandController.find_arguments_error(arguments, 2, command)
+            except Exception as e:
+                return e
+            try:
+                self.active_user = self.commands[command](*arguments, self.database)
+                return 'Ok'
+            except Exception as e:
+                return e
+
         elif command_line[0] == 'ADD':
             command, arguments = command_line
-            self.commands[command](arguments, self.active_user)
-            return 'Ok'
+            try:
+                self.commands[command](arguments, self.active_user)
+                return 'Ok'
+            except Exception as e:
+                return e
         elif command_line[0] == 'LIST':
             arguments = None
             if len(command_line) >= 2:
                 arguments = command_line[1].split(',')
                 arguments = [a.strip() for a in arguments]
-            return self.commands[command_line[0]](self.active_user, arguments)
+            try:
+                return self.commands[command_line[0]](self.active_user, arguments)
+            except Exception as e:
+                return e
         elif command_line[0] == 'CSTAT':
             command, arguments = command_line
             arguments = arguments.split(' ')
-            CommandController.find_arguments_error(arguments, 2, command)
-            self.commands[command](*arguments, self.active_user)
-            return 'Ok'
+            try:
+                CommandController.find_arguments_error(arguments, 2, command)
+            except Exception as e:
+                return e
+            try:
+                self.commands[command](*arguments, self.active_user)
+                return 'Ok'
+            except Exception as e:
+                return e
         else:
-            raise ValueError('Wrong command')
-
-
+            return 'Wrong command'

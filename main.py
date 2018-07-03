@@ -8,12 +8,12 @@ if __name__ == '__main__':
     try:
         file = open('data.txt')
     except IOError as e:
-        print(u'не удалось открыть файл')
+        print('Database not detected')
     else:
         with file:
             data = file.readlines()
             data = data[0]
-    database = Database(data)#файл
+    database = Database(data)
     cc = CommandController(database)
     input_line = input()
     while input_line != 'EXIT':
@@ -25,5 +25,3 @@ if __name__ == '__main__':
         json_data['Tasks'][login] = [task.to_dict() for task in user.tasks]
     with open('data.txt', 'w', encoding='utf8') as outfile:
         json.dump(json_data, outfile)
-    print('goodbuy')
-    #сделать запись в файл
